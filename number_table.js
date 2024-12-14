@@ -2,7 +2,7 @@ const numInput=document.getElementById('numberInput');
 const errMsg=document.getElementById('errorMsg');
 const calculateButton=document.getElementById('calculateBtn');
 const resetButtton=document.getElementById('resetBtn');
-// const resultMsg=document.getElementById('result');
+
 const tableBody=document.getElementById('table-body');
 
  function resetErrorStyles() {
@@ -12,7 +12,7 @@ const tableBody=document.getElementById('table-body');
 }
 function isValidInput(){
 resetErrorStyles();
-if(!isValidInput){
+if(!numInput.value){
     numInput.classList.add("border-red-700");
     errMsg.classList.remove("hidden");
     errMsg.textContent="plz enter a valid number";
@@ -35,7 +35,7 @@ calculateButton.addEventListener("click",function(){
     if(!isValidInput){
         return;
     }
-    const number=parseInt(calculateButton.value);
+    const number=parseInt(numInput.value);
     cleanTable();
     generateTable(number);
    });
@@ -45,10 +45,10 @@ calculateButton.addEventListener("click",function(){
    }
 
    function generateTable(number){
-    for (let rowNo=1;rowNo<=10 ; rowNo++){
+    for (let rowNo=1; rowNo<=10 ; rowNo++){
     const tableRow=generateRow(number,rowNo);
     tableBody.appendChild(tableRow); 
-      } 
+    } 
    }
    function generateRow(number,rowNo){
      const cells=[];
@@ -64,9 +64,10 @@ calculateButton.addEventListener("click",function(){
    cells[4].innerText=number * rowNo;
 
    const tableRow=document.createElement("tr");
-   for(i=0; i<cells.length; i++){
+   for( let i=0; i<cells.length; i++){
    tableRow.appendChild(cells[i]);
    }
+   return tableRow;
 }
 
    resetButtton.addEventListener("click",function(){
@@ -74,4 +75,4 @@ calculateButton.addEventListener("click",function(){
     cleanTable();
     resetErrorStyles();
 
-   })
+   });
